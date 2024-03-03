@@ -1,13 +1,7 @@
 class Stack:
 
-    stack = []
-    index = 0
-    parenthesis = ''
-
-    def __init__(self, parenthesis):
+    def __init__(self):
         self.stack = []
-        self.parenthesis = parenthesis
-        self.index = 0
 
     def push(self, element):
         self.stack.append(element)
@@ -15,12 +9,22 @@ class Stack:
     def pop(self):
         return self.stack.pop()
 
-    def last(self):
-        return self.parenthesis[len(self.parenthesis) - 1]
+    def is_empty(self):
+        return len(self.stack) == 0
 
-    def is_parenthesis_valid(self):
-        pass
+    def is_parenthesis_valid(self, parenthesis):
+        opening_brackets = ['(', '{', '[']
+        closing_brackets = [')', '}', ']']
+
+        for par in parenthesis:
+            if par in opening_brackets:
+                self.push(par)
+            elif par in closing_brackets:
+                if self.is_empty() or opening_brackets.index(self.pop()) != closing_brackets.index(par):
+                    return False
+
+        return self.is_empty()
 
 
-valid_parenthesis = Stack('(])')
-print(valid_parenthesis.is_parenthesis_valid())
+valid_parenthesis = Stack()
+print(valid_parenthesis.is_parenthesis_valid('()'))
