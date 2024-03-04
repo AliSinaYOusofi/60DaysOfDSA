@@ -1,3 +1,10 @@
+import math
+
+
+def __is_even__(data):
+    return int(data) % 2 == 0
+
+
 class Node:
 
     def __init__(self, data):
@@ -7,7 +14,7 @@ class Node:
 
 class LinkedList:
 
-    def __init__(self, data):
+    def __init__(self):
         self.head = None
 
     def append(self, data):
@@ -19,23 +26,29 @@ class LinkedList:
 
         current_node = self.head
 
-        while current_node:
+        while current_node.next:
             current_node = current_node.next
 
         current_node.next = new_node
 
     def middle_of_linked_list(self):
-
+        """
+        :return: the middle of the linked list, and if even return both of the middle node data
+        """
         current_node = self.head
-        current_size = self.__sizeof__() / 2
+        previous_node = ''
+        current_size = (self.__sizeof__() / 2)
         counter = 0
 
-        while current_node and counter < current_size:
+        while counter < current_size:
             counter += 1
+            previous_node = current_node
             current_node = current_node.next
 
-        return current_node.data
-
+        print(counter, current_size)
+        if __is_even__(current_size):
+            return previous_node.data
+        return current_node.data, current_node.next.data
 
     def __sizeof__(self):
         current_node = self.head
@@ -49,3 +62,13 @@ class LinkedList:
             current_node = current_node.next
 
         return size
+
+
+linked_middle = LinkedList()
+linked_middle.append(22)
+linked_middle.append(33)
+linked_middle.append(44)
+linked_middle.append(55)
+linked_middle.append(66)
+
+print(linked_middle.middle_of_linked_list())
