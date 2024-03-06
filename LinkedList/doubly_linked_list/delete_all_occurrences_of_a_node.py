@@ -24,24 +24,19 @@ class DLL:
         current_node.next = new_node
         new_node.previous = current_node
 
-    def straight(self):
+    def delete_all_occurrences_of_a_node(self, data):
         current_node = self.head
-        text = ''
+
+        while current_node and current_node.data == data:
+            self.head = current_node.next
+            current_node = self.head
 
         while current_node:
-            text += current_node.data
+            if current_node.data == data:
+                current_node.previous.next = current_node.next
+                if current_node.next:
+                    current_node.next.previous = current_node.previous
             current_node = current_node.next
-
-        return text
-
-    @staticmethod
-    def reversed_text(text):
-        return ''.join(list(text)[::-1])
-
-    def is_palindrome(self):
-        straight_text = self.straight()
-        reversed_text = self.reversed_text(straight_text)
-        return straight_text == reversed_text
 
     def view_linked_list(self):
         current = self.head
@@ -52,9 +47,14 @@ class DLL:
 
 
 linked = DLL()
-linked.append('m')
-linked.append('o')
-linked.append('o')
-linked.append('m')
+linked.append('2a')
+linked.append('2b')
+linked.append('2c')
+linked.append('2b')
+linked.append('2a')
+linked.append('2c')
 linked.view_linked_list()
-print(linked.is_palindrome())
+linked.delete_all_occurrences_of_a_node('2a')
+linked.delete_all_occurrences_of_a_node('2b')
+linked.delete_all_occurrences_of_a_node('2c')
+linked.view_linked_list()
