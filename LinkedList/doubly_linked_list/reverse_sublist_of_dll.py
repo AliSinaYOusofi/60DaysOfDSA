@@ -24,24 +24,8 @@ class DLL:
         current_node.next = new_node
         new_node.previous = current_node
 
-    def straight(self):
-        current_node = self.head
-        text = ''
-
-        while current_node:
-            text += current_node.data
-            current_node = current_node.next
-
-        return text
-
-    @staticmethod
-    def reversed_text(text):
-        return ''.join(list(text)[::-1])
-
-    def is_palindrome(self):
-        straight_text = self.straight()
-        reversed_text = self.reversed_text(straight_text)
-        return straight_text == reversed_text
+    def reverse_a_subset_of_dll(self, start, end):
+        pass
 
     def view_linked_list(self):
         current = self.head
@@ -52,9 +36,11 @@ class DLL:
 
 
 linked = DLL()
-linked.append('m')
-linked.append('o')
-linked.append('o')
-linked.append('m')
+linked.append('2a')
+linked.append('2b')
+linked.append('2c')
+linked.append('2b')
+linked.append('2a')
+linked.append('2c')
 linked.view_linked_list()
-print(linked.is_palindrome())
+linked.view_linked_list()
